@@ -50,4 +50,5 @@ module.exports.routes = {
     'GET /families/:family_id': 'FamilyController.get',
     'DELETE /families/:family_id': 'FamilyController.delete',
     'POST /families': 'FamilyController.create',
+    'PATCH /families/:family_id': 'FamilyController.update'
 };

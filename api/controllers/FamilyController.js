@@ -59,5 +59,19 @@ module.exports = {
             })
         }
     },
+
+    async update (req, res) {
+        try {
+            const id = req.param('family_id')
+            const updatedFamily = await Family.updateOne({ id }).set({ ...req.body })
+            res.ok(updatedFamily)
+        } catch (error) {
+            sails.log.error(`Error updating family`, { error, params: req.param })
+            return res.serverError({
+                message: `Error creating new family`,
+                error
+            })
+        }
+    },
 };
 
