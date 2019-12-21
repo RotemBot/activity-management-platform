@@ -31,6 +31,7 @@ module.exports = {
             const family = req.param('family_id')
             const gender = req.param('gender')
             const phone = req.param('phone')
+            const lastName = req.param('last_name')
 
             const familyExists = await Family.findOne({ id: family})
             if (!familyExists) {
@@ -46,7 +47,8 @@ module.exports = {
                 id,
                 family,
                 gender,
-                phoneNumber: phone
+                phoneNumber: phone,
+                lastName: lastName || familyExists.name
             })
 
             res.ok(participant)

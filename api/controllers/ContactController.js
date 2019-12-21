@@ -19,7 +19,7 @@ module.exports = {
             sails.log.error(`Error fetching contact`, { req, error })
             return res.serverError({
                 message: `Error fetching contact's details - ID ${req.param('contact_id')}`,
-                error
+                error: error.toString()
             })
         }
     },
@@ -45,7 +45,7 @@ module.exports = {
             const contact = await Contact.create({
                 id: uuidv4(),
                 firstName,
-                lastName,
+                lastName: lastName || family.name,
                 phoneNumber,
                 email,
                 gender
@@ -60,10 +60,36 @@ module.exports = {
              sails.log.error(`Error creating contact`)
              return res.serverError({
                  message: `Error creating new contact`,
-                 error
+                 error: error.toString()
              })
         }
-    }
+    },
 
+    async delete (req, res) {
+        try {
+            await Contact.destroy({ id: req.param('contact_id') })
+            res.ok()
+        } catch (error) {
+            sails.log.error(`Error deleting contact`, { params: req.params })
+            return res.serverError({
+                message: `Error deleting contact - ID ${req.param('contact_id')}`,
+                error: error.toString()
+            })
+        }
+    },
+
+    async update (req, res) {
+        try {
+            const id = req.param('contact_id')
+            const updatedContact = await Contact.updateOne({ id }).set({ ...req.body })
+            res.ok(updatedContact)
+        } catch (error) {
+            sails.log.error(`Error updating contact`, { error, params: req.param })
+            return res.serverError({
+                message: `Error updating a contact`,
+                error: error.toString()
+            })
+        }
+    }
 };
 

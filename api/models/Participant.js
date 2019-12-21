@@ -12,6 +12,10 @@ module.exports = {
             type: 'string',
             required: true
         },
+        lastName: {
+            type: 'string',
+            required: false
+        },
         dateOfBirth: {
             type: 'string',
             required: true,

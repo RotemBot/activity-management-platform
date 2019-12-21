@@ -42,10 +42,13 @@ module.exports.routes = {
     'GET /participants/:participant_id': 'ParticipantController.get',
     'POST /families/:family_id/participants': 'ParticipantController.create',
     'DELETE /participants/:participant_id': 'ParticipantController.delete',
+    'PATCH /participants/:participant_id': 'ParticipantController.update',
 
     /* Contacts */
     'GET /contacts/:contact_id': 'ContactController.get',
     'POST /families/:family_id/contacts': 'ContactController.create',
+    'DELETE /families/:family_id/contacts/:contact_id': 'ContactController.delete',
+    'PATCH /contacts/:contact_id': 'ContactController.update',
 
     /* Families */
     'GET /families/:family_id': 'FamilyController.get',

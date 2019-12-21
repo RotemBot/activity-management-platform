@@ -10,7 +10,10 @@ module.exports = {
 
     async get (req, res) {
         try {
-            const family = await Family.findOne({ id: req.param('family_id')}).populate('children')
+            const family = await Family.findOne({ id: req.param('family_id')})
+                .populate('children')
+                .populate('primaryContact')
+                .populate('secondaryContact')
             if (!family) {
                 throw new Error('No family matches given ID')
             }
