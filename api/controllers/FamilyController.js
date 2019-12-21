@@ -19,7 +19,7 @@ module.exports = {
             sails.log.error(`Error fetching family`, { params: req.param() })
             return res.serverError({
                 message: `Error fetching family's details - ID ${req.param('family_id')}`,
-                error
+                error: error.toString()
             })
         }
     },
@@ -32,7 +32,7 @@ module.exports = {
             sails.log.error(`Error deleting family`, { params: req.params })
             return res.serverError({
                 message: `Error deleting family - ID ${req.param('family_id')}`,
-                error
+                error: error.toString()
             })
         }
     },
@@ -55,7 +55,7 @@ module.exports = {
             sails.log.error(`Error creating family`, { error, params: req.param })
             return res.serverError({
                 message: `Error creating new family`,
-                error
+                error: error.toString()
             })
         }
     },
@@ -69,7 +69,7 @@ module.exports = {
             sails.log.error(`Error updating family`, { error, params: req.param })
             return res.serverError({
                 message: `Error creating new family`,
-                error
+                error: error.toString()
             })
         }
     },
