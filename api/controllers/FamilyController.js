@@ -68,10 +68,10 @@ module.exports = {
         } catch (error) {
             sails.log.error(`Error updating family`, { error, params: req.param })
             return res.serverError({
-                message: `Error creating new family`,
+                message: `Error updating a family`,
                 error: error.toString()
             })
         }
-    },
+    }
 };
 

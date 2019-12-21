@@ -41,6 +41,7 @@ module.exports.routes = {
     /* Participants */
     'GET /participants/:participant_id': 'ParticipantController.get',
     'POST /families/:family_id/participants': 'ParticipantController.create',
+    'DELETE /participants/:participant_id': 'ParticipantController.delete',
 
     /* Contacts */
     'GET /contacts/:contact_id': 'ContactController.get',

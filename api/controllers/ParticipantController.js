@@ -5,8 +5,6 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-const uuidv4 = require('uuid/v4')
-
 module.exports = {
 
     async get (req, res) {
@@ -20,7 +18,7 @@ module.exports = {
             sails.log.error(`Error fetching participant`, { req, error })
             return res.serverError({
                 message: `Error fetching participant's details - ID ${req.param('participant_id')}`,
-                error
+                error: error.toString()
             })
         }
     },
@@ -29,7 +27,7 @@ module.exports = {
         try {
             const name = req.param('name')
             const birthDate = req.param('birth_date')
-            const idNumber = req.param('id')
+            const id = req.param('id')
             const family = req.param('family_id')
             const gender = req.param('gender')
             const phone = req.param('phone')
@@ -43,10 +41,9 @@ module.exports = {
             }
 
             const participant = await Participant.create({
-                id: uuidv4(),
                 name,
                 dateOfBirth: birthDate,
-                idNumber,
+                id,
                 family,
                 gender,
                 phoneNumber: phone
@@ -56,11 +53,37 @@ module.exports = {
         } catch (error) {
             sails.log.error(`Error creating participant`)
             return res.serverError({
-                message: `Error creating new participant`,
-                error
+                message: `Error creating a new participant`,
+                error: error.toString()
+            })
+        }
+    },
+
+    async delete (req, res) {
+        try {
+            await Participant.destroy({ id: req.param('participant_id') })
+            res.ok()
+        } catch (error) {
+            sails.log.error(`Error deleting participant`, { params: req.params })
+            return res.serverError({
+                message: `Error deleting participant - ID ${req.param('participant_id')}`,
+                error: error.toString()
+            })
+        }
+    },
+
+    async update (req, res) {
+        try {
+            const id = req.param('participant_id')
+            const updatedParticipant = await Participant.updateOne({ id }).set({ ...req.body })
+            res.ok(updatedParticipant)
+        } catch (error) {
+            sails.log.error(`Error updating participant`, { error, params: req.param })
+            return res.serverError({
+                message: `Error updating a participant`,
+                error: error.toString()
             })
         }
     }
-
 };
 

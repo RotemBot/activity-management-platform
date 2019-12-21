@@ -17,7 +17,7 @@ module.exports = {
             required: true,
             regex: /^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i
         },
-        idNumber: {
+        id: {
             type: 'string',
             required: true,
             unique: true,
