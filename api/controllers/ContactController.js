@@ -26,8 +26,8 @@ module.exports = {
 
     async create (req, res) {
         try {
-            const firstName = req.param('first_name')
-            const lastName = req.param('last_name')
+            const firstName = req.param('firstName')
+            const lastName = req.param('lastName')
             const phoneNumber = req.param('phone')
             const email = req.param('email')
             const gender = req.param('gender')
