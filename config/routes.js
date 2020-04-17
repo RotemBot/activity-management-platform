@@ -52,8 +52,12 @@ module.exports.routes = {
 
     /* Families */
     'GET /families/:family_id': 'FamilyController.get',
-    'GET /families/find/:email': 'FamilyController.getByEmail',
+    'GET /families/find': 'FamilyController.getByEmail',
+    'GET /families': 'FamilyController.getAll',
     'DELETE /families/:family_id': 'FamilyController.delete',
     'POST /families': 'FamilyController.create',
-    'PATCH /families/:family_id': 'FamilyController.update'
+    'PATCH /families/:family_id': 'FamilyController.update',
+
+    /* Subscriptions */
+    'GET /families/:family_id/subscriptions': 'SubscriptionController.getByFamily'
 };

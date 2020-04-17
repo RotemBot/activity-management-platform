@@ -27,9 +27,28 @@ module.exports = {
         }
     },
 
+    async getAll (req, res) {
+        try {
+            const families = await Family.find()
+                .populate('children')
+                .populate('primaryContact')
+                .populate('secondaryContact')
+            if (!families) {
+                throw new Error('No family matches given ID')
+            }
+            res.ok(families)
+        } catch (error) {
+            sails.log.error(`Error fetching families`, { params: req.param() })
+            return res.serverError({
+                message: `Error fetching families`,
+                error: error.toString()
+            })
+        }
+    },
+
     async getByEmail (req, res) {
         try {
-            const family = await Family.findOne({ id: req.param('email')})
+            const family = await Family.findOne({ email: req.query.email })
                 .populate('children')
                 .populate('primaryContact')
                 .populate('secondaryContact')
@@ -38,7 +57,7 @@ module.exports = {
             }
             res.ok(family)
         } catch (error) {
-            sails.log.error(`Error fetching family`, { params: req.param() })
+            sails.log.error(`Error fetching family`, { params: req.query })
             return res.serverError({
                 message: `Error fetching family's details - email ${req.param('email')}`,
                 error: error.toString()

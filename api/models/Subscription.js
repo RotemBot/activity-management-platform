@@ -15,14 +15,14 @@ module.exports = {
             model: 'participant'
         },
         startDate: {
-            type: 'string',
-            defaultsTo: '01-09-2019',
-            regex: /^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i
+            type: 'number',
+            // september 2019
+            defaultsTo: 1567285200
         },
         endDate: {
-            type: 'string',
-            defaultsTo: '30-06-2020',
-            regex: /^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i
+            type: 'number',
+            // june 2020
+            defaultsTo: 1593550799
         },
         status: {
             type: 'string',
