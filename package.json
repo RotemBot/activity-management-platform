@@ -21,7 +21,7 @@
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3",
     "@types/mocha": "^5.2.7",
-    "mocha": "^6.2.3",
+    "mocha": "^10.2.0",
     "nodemon": "^1.19.4",
     "supertest": "^4.0.2"
   },
